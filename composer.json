@@ -1,0 +1,17 @@
+{
+    "name": "d_mccallister/simple_logger",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dmitriy Makeev",
+            "email": "dmitriy.makeev@4k.com.ua"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    }
+}
