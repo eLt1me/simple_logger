@@ -30,10 +30,14 @@ $logger->sendByLogger('Test with specific logger type: \'' . AbstractLogger::TYP
 $logger->sendByLogger('Test with specific logger type: \'' . AbstractLogger::TYPE_DB . '\'', AbstractLogger::TYPE_DB);
 $logger->sendByLogger('Test with specific logger type: \'' . AbstractLogger::TYPE_EMAIL . '\'', AbstractLogger::TYPE_EMAIL);
 $logger->setMessage('New Message');
+
 echo "\n\n-----Testing log() method:\n";
 $logger->log();
+
 echo "-----\nTesting logTo() method for " . AbstractLogger::TYPE_FILE . ":\n";
 $logger->logTo(AbstractLogger::TYPE_FILE);
+
 echo "-----\nLog To all:\n";
 $logger->logToAll();
+
 exit(0);
