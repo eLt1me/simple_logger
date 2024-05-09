@@ -18,6 +18,7 @@ abstract class AbstractLogger implements LoggerInterface
      * @var string
      */
     protected string $type;
+    protected string $message;
     /**
      * @var LoggerStorageInterface[]
      */
@@ -30,6 +31,16 @@ abstract class AbstractLogger implements LoggerInterface
             self::TYPE_DB,
             self::TYPE_FILE,
         ];
+    }
+
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): void
+    {
+        $this->message = $message;
     }
 
     public function getType(): string
@@ -56,5 +67,24 @@ abstract class AbstractLogger implements LoggerInterface
             static::$loggerStorageSingletons[$type] = $logger;
         }
         return $logger;
+    }
+
+    public function log()
+    {
+        $this->send($this->message);
+    }
+
+    public function logTo(string $type)
+    {
+        self::validateLoggerType($type);
+        $this->sendByLogger($this->message, $type);
+    }
+
+    public function logToAll()
+    {
+        foreach (self::getAllowedLoggerTypes() as $type) {
+            $logger = $this->getLoggerStorageByType($type);
+            $logger->save($this->getMessage());
+        }
     }
 }
